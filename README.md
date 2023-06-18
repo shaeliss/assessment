@@ -40,6 +40,7 @@ To achieve the needed restrictions per group of users (devs,devops,qa), i applie
 
 - Used a liveness probe on the application pod in order to be able to understand when the pod is ready to serve requests
 - Added a different user in the Dockerfile to avoid using root and introducing security vulnerabilities
+- Specified resources requests and limits for the pod in order to make sure node has the needed resources available and avoid crushing node in case of unexpected errors
 
 ## Potential improvements
 
@@ -48,10 +49,6 @@ To achieve the needed restrictions per group of users (devs,devops,qa), i applie
    - Can use AWS Spot instances for this and also karpenter
 3. Buy an SSL certificate from a reputable provider and also a DOMAIN NAME to use for exposing the application online
 4. Add Pipeline which will be responsible for scanning the source code for security vulnerabilities e.g checkmarx
-
-
-
-
 
 
 
