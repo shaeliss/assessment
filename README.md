@@ -45,9 +45,10 @@ To achieve the needed restrictions per group of users (devs,devops,qa), i applie
 
 1. Consider using a canary deployment on the Cluster to be able to test changes on the application on an initially smaller user base by using a load balancer
 2. Consider using an autoscalling cluster which will be able to introduced new worker nodes in case of increased traffic
-   - Can use AWS Spot instances for this and also carpenter
+   - Can use AWS Spot instances for this and also karpenter
 3. Buy an SSL certificate from a reputable provider and also a DOMAIN NAME to use for exposing the application online
-4. Add Pipeline which will be responsible for scanning the source code for security vulnerabilities
+4. Add Pipeline which will be responsible for scanning the source code for security vulnerabilities e.g checkmarx
+
 
 
 
