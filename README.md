@@ -54,6 +54,7 @@ Decided to provision my cluster using minikube on my local machine as the needs 
 - I first installed traefik on my minikube cluster using the official documentation. 
 - I exposed the python application using an IngressRoute which routes traffic from assessment-as.com/test to the service on my cluster. 
 - I also introduced a middleware which whitelists any range of IPs we want. For example we can whitelist the Public IP ranges comming from specific countries only. In my case i whitelisted only my Public IP to keep everyone else out :P
+- The mentioned resources were also created using helm charts.
 
 <img width="1177" alt="Screenshot 2023-06-20 at 12 39 42 AM" src="https://github.com/shaeliss/assessment/assets/86359227/0bd2714f-5a19-4c0a-8f18-3aecf14d8e2b">
 
