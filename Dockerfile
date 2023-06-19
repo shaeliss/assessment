@@ -5,7 +5,7 @@ COPY hello_world.py .
 RUN pip install flask
 
 # Create a non-root user for running the application
-RUN adduser -D -u 1001 myuser
+RUN adduser myuser
 
 # Change ownership and permissions for application files
 RUN chown -R myuser:myuser hello_world.py \
