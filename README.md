@@ -59,7 +59,13 @@ Decided to provision my cluster using minikube on my local machine as the needs 
 
 ## ArgoCD
 
+Create 2 apps (One for staging and one for dev environments)
 
+<img width="1096" alt="Screenshot 2023-06-20 at 2 12 32 AM" src="https://github.com/shaeliss/assessment/assets/86359227/35fb0422-9d6f-40aa-aa32-32545cb44276">
+
+Staging environment resources:
+
+<img width="1260" alt="Screenshot 2023-06-20 at 2 05 14 AM" src="https://github.com/shaeliss/assessment/assets/86359227/1dbf6874-d213-4b3c-8834-b08fb7d88998">
 
 
 ### RBAC Authorization
