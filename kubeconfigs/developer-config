@@ -1,0 +1,32 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /Users/andreassiailis/.minikube/ca.crt
+    extensions:
+    - extension:
+        last-update: Sun, 18 Jun 2023 12:04:46 EEST
+        provider: minikube.sigs.k8s.io
+        version: v1.30.1
+      name: cluster_info
+    server: https://127.0.0.1:49749
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    extensions:
+    - extension:
+        last-update: Sun, 18 Jun 2023 17:12:29 EEST
+        provider: minikube.sigs.k8s.io
+        version: v1.30.1
+      name: context_info
+    namespace: dev
+    user: developer-user1
+  name: my-user
+current-context: my-user
+kind: Config
+preferences: {}
+users:
+- name: developer-user1
+  user:
+    client-certificate: /Users/andreassiailis/DevOps/assessment/developer-user1.crt
+    client-key: /Users/andreassiailis/DevOps/assessment/developer-user1.key
