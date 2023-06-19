@@ -57,11 +57,15 @@ Decided to provision my cluster using minikube on my local machine as the needs 
 
 <img width="1177" alt="Screenshot 2023-06-20 at 12 39 42 AM" src="https://github.com/shaeliss/assessment/assets/86359227/0bd2714f-5a19-4c0a-8f18-3aecf14d8e2b">
 
+## ArgoCD
+
 
 
 
 ### RBAC Authorization
 To achieve the needed restrictions per group of users (devs,devops,qa), i applied RBAC on my cluster by creating a role and rolebinding in each namespace to eachive the restrictions in the description of the assessment. The helm charts for these roles and rolebindings can be found in the repository provided at the top of the file. I also created a kube config file for each of the group of users so that it will be provided to them depending on the needed level of access on the Cluster. This will be applied when connecting to the cluster machine using export KUBECONFIG=config-file.
+
+**Roles and Rolebindings were created in the cluster using helm charts.
 
 New user accounts can be created on the machine which is hosting the cluster and each user can have access only on his kubeconfig file. I added the sample kubeconfig files in the scripts directory in the repository.
 
