@@ -11,7 +11,7 @@ WORKDIR /app
 
 # Change ownership and permissions for application files
 RUN chown -R myuser:myuser hello_world.py \
-    && chmod -R 750 /app
+    && chmod -R 750 /app/*
 
 # Switch to the non-root user
 USER myuser
