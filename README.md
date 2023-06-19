@@ -79,6 +79,7 @@ New user accounts can be created on the machine which is hosting the cluster and
 
 - Created a new user in the Dockerfile and use it to run the application to avoid using root and introducing security vulnerabilities
 - Specified resources requests and limits for the pod in order to make sure node has the needed resources available and avoid crushing node in case of unexpected errors
+- Use of service account in Kubernetes deployment as it is a best practice to leverage service accounts to ensure secure and controlled access to Kubernetes resources and to adhere to the principle of least privilege for your applications.
 
 ## Potential improvements
 
