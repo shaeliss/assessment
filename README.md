@@ -26,6 +26,23 @@ Decided to spin up my Jenkins instance by using EC2 AWS instances because this w
 - I created a CB Pipeline to Automate the containerization of the application (Jenkinsfile in repo)
 - I created a webhook on my github repository and also configure my Pipeline so that it will be triggered each time there is a commit in it. This way the developers can test their changes by using the new image on the dev Cluster with almost zero effort
 
+### The CB/CI Pipeline
+
+<img width="817" alt="Screenshot 2023-06-20 at 1 18 43 AM" src="https://github.com/shaeliss/assessment/assets/86359227/db2c5007-5566-4658-b13a-cbafadf3c416">
+
+
+
+- Use Jenkinsfile from github repo
+- Stages:
+  - Checkout repo containing Dockerfile and the python application
+  - Build Docker Image
+  - Push Docker Image to Dockerhub
+  - Deploy on staging (Optional)
+
+ I also added a boolean parameter so that the deployment stage to staging environment can be skipped
+ 
+<img width="730" alt="Screenshot 2023-06-20 at 1 31 40 AM" src="https://github.com/shaeliss/assessment/assets/86359227/f53036ef-acb8-480d-a682-546f0cc425d3">
+
 
 ## Kubernetes Cluster
 
@@ -34,27 +51,34 @@ Decided to provision my cluster using minikube on my local machine as the needs 
 
 ### Traefik
 
-I first installed traefik on my minikube cluster using the official documentation. I exposed the python application using an Ingress which routes traffic from assessment-as.com/test to the service on my cluster. This routing can be seen below on the Traefik dashboard.
-<img width="1508" alt="Screenshot 2023-06-20 at 12 01 00 AM" src="https://github.com/shaeliss/assessment/assets/86359227/1b85ec6d-74dc-4432-91be-6a6bbfbed79c">
+- I first installed traefik on my minikube cluster using the official documentation. 
+- I exposed the python application using an IngressRoute which routes traffic from assessment-as.com/test to the service on my cluster. 
+- I also introduced a middleware which whitelists any range of IPs we want. For example we can whitelist the Public IP ranges comming from specific countries only. In my case i whitelisted only my Public IP to keep everyone else out :P
+
+<img width="1177" alt="Screenshot 2023-06-20 at 12 39 42 AM" src="https://github.com/shaeliss/assessment/assets/86359227/0bd2714f-5a19-4c0a-8f18-3aecf14d8e2b">
+
 
 
 
 ### RBAC Authorization
-To achieve the needed restrictions per group of users (devs,devops,qa), i applied RBAC on my cluster by creating a role and rolebinding in each namespace to eachive the restrictions in the description of the assessment. The helm charts for these roles and rolebindings can be found in the repository provided at the top of the file. I also created a kube config file for each of the group of users so that it will be provided to them depending on the needed level of access on the Cluster. This will be applied when connecting to the cluster machine using export KUBECONFIG=config-file
+To achieve the needed restrictions per group of users (devs,devops,qa), i applied RBAC on my cluster by creating a role and rolebinding in each namespace to eachive the restrictions in the description of the assessment. The helm charts for these roles and rolebindings can be found in the repository provided at the top of the file. I also created a kube config file for each of the group of users so that it will be provided to them depending on the needed level of access on the Cluster. This will be applied when connecting to the cluster machine using export KUBECONFIG=config-file.
+
+New user accounts can be created on the machine which is hosting the cluster and each user can have access only on his kubeconfig file. I added the sample kubeconfig files in the scripts directory in the repository.
 
 ## Details of deployment
 
-- Used a liveness probe on the application pod in order to be able to understand when the pod is ready to serve requests
-- Added a different user in the Dockerfile to avoid using root and introducing security vulnerabilities
+- Created a new user in the Dockerfile and use it to run the application to avoid using root and introducing security vulnerabilities
 - Specified resources requests and limits for the pod in order to make sure node has the needed resources available and avoid crushing node in case of unexpected errors
 
 ## Potential improvements
 
-1. Consider using a canary deployment on the Cluster to be able to test changes on the application on an initially smaller user base by using a load balancer
-2. Consider using an autoscalling cluster which will be able to introduced new worker nodes in case of increased traffic
+1. Use a liveness probe on the application pod in order to be able to understand when the pod is ready to serve requests
+2. Consider using a canary deployment on the Cluster to be able to test changes on the application on an initially smaller user base by using a load balancer
+3. Consider using an autoscalling cluster which will be able to introduced new worker nodes in case of increased traffic
    - Can use AWS Spot instances for this and also karpenter
-3. Buy an SSL certificate from a reputable provider and also a DOMAIN NAME to use for exposing the application online
-4. Add Pipeline which will be responsible for scanning the source code for security vulnerabilities e.g checkmarx
+4. Buy an SSL certificate from a reputable provider and also a DOMAIN NAME to use for exposing the application online
+5. Add SSL certificate on the Traefik deployment (Had no time to do it)
+6. Add Pipeline which will be responsible for scanning the source code for security vulnerabilities e.g checkmarx
 
 
 
