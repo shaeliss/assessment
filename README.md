@@ -32,6 +32,12 @@ Decided to spin up my Jenkins instance by using EC2 AWS instances because this w
 ### Spinning up the cluster - https://minikube.sigs.k8s.io/docs/start/
 Decided to provision my cluster using minikube on my local machine as the needs for resources and complexity is low for the purpose of the assessment. A single node cluster should be enough for the single pod (per namespace) in the cluster. I also deployed argoCD in my cluster using the official documentation and used port forwarding to expose the UI locally and monitor my deployments. 
 
+### Traefik
+
+I first installed traefik on my minikube cluster using the official documentation. I exposed the python application using an Ingress which routes traffic from assessment-as.com/test to the service on my cluster. This routing can be seen below on the Traefik dashboard.
+<img width="1508" alt="Screenshot 2023-06-20 at 12 01 00 AM" src="https://github.com/shaeliss/assessment/assets/86359227/1b85ec6d-74dc-4432-91be-6a6bbfbed79c">
+
+
 
 ### RBAC Authorization
 To achieve the needed restrictions per group of users (devs,devops,qa), i applied RBAC on my cluster by creating a role and rolebinding in each namespace to eachive the restrictions in the description of the assessment. The helm charts for these roles and rolebindings can be found in the repository provided at the top of the file. I also created a kube config file for each of the group of users so that it will be provided to them depending on the needed level of access on the Cluster. This will be applied when connecting to the cluster machine using export KUBECONFIG=config-file
