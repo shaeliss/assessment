@@ -26,7 +26,7 @@ Decided to spin up my Jenkins instance by using EC2 AWS instances because this w
 - I created a CB Pipeline to Automate the containerization of the application (Jenkinsfile in repo)
 - I created a webhook on my github repository and also configure my Pipeline so that it will be triggered each time there is a commit in it. This way the developers can test their changes by using the new image on the dev Cluster with almost zero effort
 
-### The CB/CI Pipeline
+### The CI/CD Pipeline
 
 <img width="817" alt="Screenshot 2023-06-20 at 1 18 43 AM" src="https://github.com/shaeliss/assessment/assets/86359227/db2c5007-5566-4658-b13a-cbafadf3c416">
 
